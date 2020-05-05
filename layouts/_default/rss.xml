@@ -1,0 +1,86 @@
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
+{{- $pages := $pctx.RegularPages -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{/*
+  OK, dateFormat is a pain if we're just providing YYYY-MM-DD.
+  To show the correct date (not the day before), we used RFC 822Z
+  and tweaked the 15:04:05 -> 3:04:05
+  which outputs 7:00AM (8:00AM on daylight saving time).
+  
+  Example time formats for Go here:
+  https://golang.org/pkg/time/#example_Time_Format
+*/}}
+{{- $dateFormat := "Mon, 02 Jan 2006 3:04:05 -0700" -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" ?>" | safeHTML }}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . | markdownify | plainify }} – {{ end }}{{ .Site.Title }}{{ end }}</title>
+
+  {{/* Links */}}
+  <link href="{{ .Permalink }}" rel="self" />
+
+  {{ with $.Site.Params.description }}
+  <subtitle>{{ . | markdownify | plainify }}</subtitle>
+  {{ end }}
+
+  <generator>Hugo -- gohugo.io</generator>
+  
+  {{- with .Site.Author }}
+  <managingEditor>{{.name}}</managingEditor>
+  <webMaster>{{.name}}</webMaster>
+  {{ end -}}
+  
+  {{- with .Site.Copyright }}
+  <copyright>{{.}}</copyright>
+  {{ end }}
+  
+  <lastBuildDate>{{ dateFormat $dateFormat now }}</lastBuildDate>
+  
+  {{ range $pages }}
+  <entry xml:lang="{{ $.Site.LanguageCode | default "en" }}">
+    
+    {{ with .OutputFormats.Get "html" -}}
+      {{ printf `<link rel="alternate" type="%s" href="%s" title="%s" />` .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    <title>{{ .Title | markdownify | plainify }}</title>
+
+    <pubDate>{{ dateFormat $dateFormat .Date.UTC }}</pubDate>
+    <updated>{{ dateFormat $dateFormat .Date.UTC }}</updated>
+
+    {{/*
+      Commented out `updated` fields below, which would hard-reflect the update date in an RSS feed, and thus change the order.
+    */}}
+    {{/*
+    {{- if .Lastmod -}}
+    {{- if .GitInfo -}}
+    <updated>{{ dateFormat $dateFormat .GitInfo.AuthorDate }}</updated>
+    {{- else -}}
+    <updated>{{ dateFormat $dateFormat .Lastmod.UTC }}</updated>
+    {{- end -}}
+    {{- end -}}
+    */}}
+    {{/* End comment */}}
+
+    {{- with .Site.Author }}
+    <author>
+      {{- with .name }}
+      <name>{{.}}</name>
+      {{ end -}}
+      {{- with .email }}
+      <email>{{.}}</email>
+      {{ end -}}
+      {{- with .uri }}
+      <uri>{{.}}</uri>
+      {{ end -}}
+    </author>
+    {{ end -}}
+    
+    <id>{{ .Permalink }}</id>
+    
+    <summary type="html">{{ .Content | html }}</summary>
+  </entry>
+  {{ end -}}
+</feed>

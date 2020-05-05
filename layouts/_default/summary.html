@@ -1,0 +1,21 @@
+<a href="{{ .Permalink }}" title="{{ with .Page.CurrentSection.Title | singularize }}{{ . }}:{{ end }}{{ with .Page.Title }} {{ . }}{{ end }}">
+
+  <section>
+
+    {{- if and (ne .Page.Parent.Kind "taxonomyTerm") .File -}}
+    <div>
+      #{{- .File.TranslationBaseName -}}
+    </div>
+    {{- end -}}
+
+    <h2>
+      {{- if eq .Page.Parent.Kind "taxonomyTerm" }}#{{ end -}}
+      {{ .Title | markdownify -}}
+      {{- if .Draft }}
+      <small>{{ i18n "Draft" | default "Draft" }}</small>
+      {{- end -}}
+    </h2>
+
+  </section>
+
+</a>

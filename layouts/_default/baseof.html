@@ -1,0 +1,44 @@
+<!doctype html>
+<html class="no-js" lang="{{ .Page.Lang }}">
+
+  <head>
+    {{- partial "head/head.html" . -}}
+    {{/* "title" block outside head.html to render on different page types */}}
+    <title>{{ block "title" . -}}
+      {{ with .Title }}{{ . | markdownify | plainify }} &mdash; {{ end }}{{ .Site.Title }}
+      {{- end }}</title>
+  </head>
+
+  <body>
+
+    <header>
+      {{- block "header" . }}
+      {{- partial "header.html" . -}}
+      {{- end -}}
+    </header>
+
+    <main>
+      {{- block "main" . }}{{/* Default to article with content */}}
+      <article class="content">
+        {{- .Content -}}
+      </article>
+      {{- end }}
+    </main>
+
+    <footer>
+      {{- block "footer" . }}
+      {{- partial "footer.html" . -}}
+      {{- end -}}
+    </footer>
+
+    <script>
+      {{- $espaceFineJS := resources.Get "scripts/espacefine.js" | resources.Minify }}
+      {{ $espaceFineJS.Content | safeJS -}}
+       // espacefine for French
+       if (document.documentElement.getAttribute('lang').match(/^fr/)) {
+         espaceFine();
+       }
+    </script>
+
+  </body>
+</html>

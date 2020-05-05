@@ -1,0 +1,24 @@
+<ul class="nav nav-break">
+  {{- $currentPage := . -}}
+  {{- range .Site.Menus.main.ByWeight -}}
+  <li class="{{if or ($currentPage.IsMenuCurrent "main" . ) ($currentPage.HasMenuCurrent "main" . ) }}active{{ end }}{{ if .HasChildren }} dropdown{{ end }}">
+    <a href="{{ .URL }}">{{ .Title }}{{ if .HasChildren }} <span>&darr;</span>{{ end }}</a>
+    {{- if .HasChildren -}}
+    <ul class="dropdown-list">
+      {{- range .Children.ByWeight -}}
+      <li {{ if .HasChildren }}class="dropdown"{{end}}>
+        <a href="{{ .URL }}">{{ .Title }}{{ if .HasChildren }} <span>›</span>{{ end }}</a>
+        {{ if .HasChildren }}
+        <ul class="dropdown-list">
+          {{ range .Children.ByWeight }}
+          <li><a href="{{ .URL }}">{{ .Title }}</a></li>
+          {{ end }}
+        </ul>
+        {{- end -}}
+      </li>
+      {{- end -}}
+    </ul>
+    {{- end -}}
+  </li>
+  {{- end -}}
+</ul>

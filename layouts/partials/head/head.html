@@ -1,0 +1,50 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{{- if .Description }}
+<meta name="description" content="{{ .Description | markdownify | plainify }}" />
+{{- end -}}
+
+{{- if .Keywords -}}
+<meta name="keywords" content="{{ delimit .Keywords "," }}" />
+{{- end -}}
+
+{{- if .Site.Author -}}
+<meta name="author" content="{{ delimit .Site.Author " " }}" />
+{{- end -}}
+
+{{/* Being nice with gohugo.io */}}
+{{ hugo.Generator }}
+
+{{ partial "head/favicon.html" . }}
+
+<!-- Open Graph -->
+{{- partial "head/opengraph.html" . -}}
+
+<!-- Twitter Cards -->
+{{- partial "head/twitter_cards.html" . -}}
+
+<!-- Schema.org -->
+{{- partial "head/schema.html" . -}}
+
+<!-- Dublin Core -->
+{{- partial "head/dublin_core.html" . -}}
+
+<!-- FOUC -->
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+</script>
+
+{{- if .Site.IsServer }}
+  {{ $style := resources.Get "styles/styles.css" | postCSS (dict "config" "./assets/styles/dev/postcss.config.js") }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}">
+{{- else -}}
+  {{ $style := resources.Get "styles/styles.css" | postCSS (dict "config" "./assets/styles/postcss.config.js") | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end -}}
+
+{{- with .OutputFormats.Get "rss" -}}
+<!-- RSS Feed -->
+{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{- end -}}
+

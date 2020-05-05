@@ -1,0 +1,130 @@
+# Hugo config file
+# https://gohugo.io/
+
+
+#########################################
+# Site title
+#########################################
+title: 
+
+
+#########################################
+# Site URL
+# 
+# can be something like:
+# - /
+# - http://example.com
+# - http://example.com/base/
+#########################################
+baseURL: /
+canonifyURLs: true
+
+
+#########################################
+# Languages
+#########################################
+languageCode: en
+defaultContentLanguage: en
+
+# Enable multilingual mode
+#languages:
+#  en: 
+#    languageName: English
+#    weight: 1
+#    title: 
+#    params:
+#
+#  fr:
+#    languageName: Français
+#    weight: 2
+#    title: 
+#    
+#    params:
+#      description: 
+
+
+#########################################
+# Copyright
+#########################################
+copyright: 
+
+
+#########################################
+# Author
+#########################################
+author:
+  name:
+  email:
+  uri:
+  first:
+  last:
+  twitter: 
+
+
+
+#########################################
+# Social
+#########################################
+Social:
+  facebook:
+  twitter:
+
+
+#########################################
+# Menu
+#########################################
+menu:
+
+  main:
+  - name: about
+    title: About
+    url: /about
+    weight: 1
+
+  footer:
+    - name: rss
+      title: RSS
+      url: /index.xml
+      weight: 1
+    - name: privacy
+      title: Privacy
+      url: /privacy
+      weight: 2
+
+# Lazy menu sections
+# Automatically add all sections to the "main" menu
+#sectionPagesMenu: main
+
+
+#########################################
+# Theme
+#
+# Extend with files in the `themes/` dir.
+#########################################
+#theme: 
+
+#########################################
+# Params
+#
+# Non-core fields to customize your site.
+#########################################
+params:
+
+  # Default/generic description
+  descripton:
+  
+  # Open Graph images (Facebook, Twitter)
+  # Must be a *list*, e.g. lines starting with a dash
+  # or comma-separated items surrounded by square brackets.
+  images:
+  #- /img/featured.jpg
+
+  # Markdown rendering engine
+  markup:
+    goldmark:
+      extensions:
+        # Smartypants-like quotes extension
+        typographer: true
+      renderer:
+        # Enalbe HTML tags in markdown
+        unsafe: true

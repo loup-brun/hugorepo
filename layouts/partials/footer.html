@@ -1,0 +1,5 @@
+{{- partial "menus/footer-menu.html" . -}}
+
+<p>
+  {{- with .Site.Author }}{{ .name }} {{ end}}{{ with .Site.Copyright }}— {{ . }}{{ end -}}
+</p>

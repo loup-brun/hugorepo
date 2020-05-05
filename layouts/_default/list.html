@@ -1,0 +1,34 @@
+{{- define "title" -}}
+{{- if eq .Kind "taxonomy" -}}
+{{ i18n "Content tagged" | default "Content tagged" }}
+#{{- end -}}
+{{- .Title | markdownify | plainify }} &mdash; {{ .Site.Title -}}
+{{- end -}}
+
+{{- define "main" -}}
+
+{{- if .Content -}}
+<article class="content">
+  {{- .Content -}}
+</article>
+{{- end -}}
+
+{{- if .Pages -}}
+<ul class="list-unstyled">
+  {{- range .Pages -}}
+  <li>
+    {{- .Render "summary" -}}
+  </li>
+  {{- end -}}
+</ul>
+{{- end -}}
+
+{{- if .Pages -}}
+{{ with .OutputFormats.Get "rss" -}}
+<footer>
+  <a rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="RSS">RSS</a>
+</footer>
+{{ end -}}
+{{- end -}}
+
+{{- end -}}

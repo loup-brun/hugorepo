@@ -1,0 +1,11 @@
+{{- if .Site.Menus.footer -}}
+<ul>
+  {{ $currentPage := . }}
+  {{- range .Site.Menus.footer -}}
+  <li class="{{if or ($currentPage.IsMenuCurrent "main" . ) ($currentPage.HasMenuCurrent "main" . ) }}active{{ end }}">
+    <a href="{{ .URL | relLangURL }}">
+      {{- .Title -}}
+    </a></li>
+  {{- end -}}
+</ul>
+{{- end -}}

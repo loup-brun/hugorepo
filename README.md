@@ -56,7 +56,7 @@ npm run deploy  # ./commands/deploy.sh
 ### 🖼 img
 
 ```md
-{{< img src="/path/to/img.jpg" class="custom-class" title="Title (optional)" caption="Cpation (optional)" >}}
+{{< img src="/path/to/img.jpg" class="custom-class" title="Title (optional)" caption="Caption (optional)" >}}
 ```
 
 Params:

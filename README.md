@@ -4,12 +4,12 @@ My favourite files for making websites with [Hugo](https://gohugo.io/).
 
 ## Features
 
-- Stripped-down, boilerplate kind of repo
-- Perfect as a starting point for a theme
+- Stripped-down, boilerplate structure
+- Works as a starting point for a theme
 - Rich, semantic HTML (with templates featuring OpenGraph, Schema.org, Dublin Core)
+- Clean, basic markup for the basic pages (list, single)
 - Useful code snippets, such as menu templates
-- Clean, basic markup for the basic templates (list, single pages)
-- Write more effective CSS with PostCSS (with autoprefixer, nested SASS-like syntax, purgeCSS, import)
+- Write more effective CSS with [PostCSS](https://postcss.org/) (Autoprefixer, nested SASS-like syntax, purgeCSS, import)
 - Ready for TailwindCSS
 
 ## 🛠  Install

@@ -17,7 +17,9 @@ title:
 # - http://example.com/base/
 #########################################
 baseURL: /
-canonifyURLs: true
+
+# Canonify URLs: build long formed links
+#canonifyURLs: true
 
 
 #########################################
@@ -32,13 +34,14 @@ defaultContentLanguage: en
 #    languageName: English
 #    weight: 1
 #    title: 
+#    # Language-specific params
 #    params:
 #
 #  fr:
 #    languageName: Français
 #    weight: 2
 #    title: 
-#    
+#    # Language-specific params
 #    params:
 #      description: 
 
@@ -59,7 +62,6 @@ author:
   first:
   last:
   twitter: 
-
 
 
 #########################################

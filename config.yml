@@ -105,6 +105,22 @@ menu:
 #########################################
 #theme: 
 
+
+#########################################
+# Markup
+#
+# Markdown rendering engine
+#########################################
+markup:
+  goldmark:
+    extensions:
+      # Smartypants-like quotes extension
+      typographer: true
+    renderer:
+      # Enalbe HTML tags in markdown
+      unsafe: true
+
+
 #########################################
 # Params
 #
@@ -120,13 +136,3 @@ params:
   # or comma-separated items surrounded by square brackets.
   images:
   #- /img/featured.jpg
-
-  # Markdown rendering engine
-  markup:
-    goldmark:
-      extensions:
-        # Smartypants-like quotes extension
-        typographer: true
-      renderer:
-        # Enalbe HTML tags in markdown
-        unsafe: true

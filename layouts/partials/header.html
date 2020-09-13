@@ -1,7 +1,18 @@
-<nav>
-  <a href="{{ .Site.BaseURL }}" title="{{ .Site.Title | markdownify }}">
-    {{- .Site.Title | markdownify -}}
-  </a>
+<nav class="SiteHead justify-between items-center">
+  <div class="container flex flex-row">
+    <a href="{{ .Site.BaseURL }}"
+       title="{{ .Site.Title | markdownify }}"
+       class="SiteHead__Title no-underline font-bold">
+      {{- .Site.Title | markdownify -}}
+    </a>
 
-  {{- partial "menus/main-menu.html" . -}}
+    <ul class="SiteHead__Menu">
+      {{- $currentPage := . -}}
+      {{- range .Site.Menus.main.ByWeight -}}
+      <li class="{{if or ($currentPage.IsMenuCurrent "main" . ) ($currentPage.HasMenuCurrent "main" . ) }}active{{ end }}">
+        <a href="{{ .URL }}">{{ .Title }}</a>
+      </li>
+      {{- end -}}
+    </ul>
+  </div>
 </nav>

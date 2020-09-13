@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "My favourite files for making websites with Hugo.",
   "scripts": {
+    "serve:styles": "npx postcss assets/src/index.css -o assets/styles/styles.dev.css --config assets/src/dev --watch",
+    "build:styles": "npx postcss assets/src/index.css -o assets/styles/styles.built.css --config assets/src",
     "serve": "hugo serve --disableFastRender --buildDrafts --buildFuture",
     "build": "rm -rf public && hugo --minify",
     "deploy": "commands/deploy.sh"
@@ -10,13 +12,13 @@
   "author": "Louis-Olivier Brassard <louis@loupbrun.ca>",
   "license": "WTFPL",
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^2.1.2",
-    "autoprefixer": "^9.7.6",
-    "postcss-cli": "^7.1.1",
+    "@fullhuman/postcss-purgecss": "^2.0.6",
+    "autoprefixer": "^9.7.4",
+    "postcss": "^7.0.26",
+    "postcss-cli": "^7.1.0",
     "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.1",
-    "postcss-reporter": "^6.0.1",
-    "tailwindcss": "^1.4.4"
+    "tailwindcss": "^1.8.9"
   },
   "repository": "https://github.com/loup-brun/hugorepo"
 }

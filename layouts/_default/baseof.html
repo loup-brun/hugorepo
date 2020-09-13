@@ -5,7 +5,7 @@
     {{- partial "head/head.html" . -}}
     {{/* "title" block outside head.html to render on different page types */}}
     <title>{{ block "title" . -}}
-      {{ with .Title }}{{ . | markdownify | plainify }} &mdash; {{ end }}{{ .Site.Title }}
+      {{ with .Title }}{{ . | markdownify | plainify }}{{ end }}{{ if and .Title .Site.Title }} &mdash; {{ end }}{{ .Site.Title }}
       {{- end }}</title>
   </head>
 
@@ -19,7 +19,7 @@
 
     <main>
       {{- block "main" . }}{{/* Default to article with content */}}
-      <article class="content">
+      <article class="container content">
         {{- .Content -}}
       </article>
       {{- end }}
@@ -32,12 +32,12 @@
     </footer>
 
     <script>
+      {{ if eq .Lang "fr" }}
       {{- $espaceFineJS := resources.Get "scripts/espacefine.js" | resources.Minify }}
       {{ $espaceFineJS.Content | safeJS -}}
        // espacefine for French
-       if (document.documentElement.getAttribute('lang').match(/^fr/)) {
          espaceFine();
-       }
+       {{ end }}
     </script>
 
   </body>

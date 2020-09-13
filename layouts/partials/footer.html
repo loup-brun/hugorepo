@@ -1,5 +1,19 @@
-{{- partial "menus/footer-menu.html" . -}}
+<footer>
+  <div class="container flex flex-row justify-between">
+    {{- if .Site.Menus.footer -}}
+    <ul>
+      {{ $currentPage := . }}
+      {{- range .Site.Menus.footer -}}
+      <li class="{{if or ($currentPage.IsMenuCurrent "main" . ) ($currentPage.HasMenuCurrent "main" . ) }}active{{ end }}">
+        <a href="{{ .URL | relLangURL }}">
+          {{- .Title -}}
+        </a></li>
+      {{- end -}}
+    </ul>
+    {{- end -}}
 
-<p>
-  {{- with .Site.Author }}{{ .name }} {{ end}}{{ with .Site.Copyright }}— {{ . }}{{ end -}}
-</p>
+    <p>
+      {{- with .Site.Author }}{{ .name }} {{ end}}{{ with .Site.Copyright }}— {{ . }}{{ end -}}
+    </p>
+  </div>
+</footer>

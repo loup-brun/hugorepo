@@ -6,8 +6,8 @@
 <meta name="DC.Creator" content="{{ .last }}, {{ .first }}">
 {{- end -}}
 
-{{- with .Description -}}
-<meta name="DC.Subject" content="{{ . | markdownify | plainify }}">
+{{- with .Params.Keywords -}}
+<meta name="DC.Subject" content="{{ range . }}{{.}}, {{ end }}">
 {{- end -}}
 
 {{- with .Description -}}

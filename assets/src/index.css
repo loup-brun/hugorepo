@@ -1,8 +1,11 @@
 /* Tailwind base - put variables under: tailwind.config.js */
 @import "node_modules/tailwindcss/base";
 
-/* Site Specific */
-@import "assets/styles/partials/site";
+/* Site-specific styles */
+/* Do not purge these styles */
+/* purgecss start ignore */
+@import "./site";
+/* purgecss end ignore */
 
 /* Tailwind component classes registered by plugins */
 @import "node_modules/tailwindcss/components";

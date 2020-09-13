@@ -5,7 +5,7 @@
 #########################################
 # Site title
 #########################################
-title: 
+title: test site
 
 
 #########################################
@@ -77,21 +77,21 @@ Social:
 #########################################
 menu:
 
-  main:
-  - name: about
-    title: About
-    url: /about
-    weight: 1
+#  main:
+#  - name: about
+#    title: About
+#    url: /about
+#    weight: 1
 
   footer:
     - name: rss
       title: RSS
       url: /index.xml
       weight: 1
-    - name: privacy
-      title: Privacy
-      url: /privacy
-      weight: 2
+#    - name: privacy
+#      title: Privacy
+#      url: /privacy
+#      weight: 2
 
 # Lazy menu sections
 # Automatically add all sections to the "main" menu

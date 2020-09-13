@@ -129,7 +129,7 @@ markup:
 params:
 
   # Default/generic description
-  descripton:
+  description:
   
   # Open Graph images (Facebook, Twitter)
   # Must be a *list*, e.g. lines starting with a dash

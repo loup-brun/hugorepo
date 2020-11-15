@@ -1,6 +1,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<!-- FOUC -->
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+</script>
+
 {{- if .Description }}
 <meta name="description" content="{{ .Description | markdownify | plainify }}" />
 {{- end -}}
@@ -9,31 +14,36 @@
 <meta name="keywords" content="{{ delimit .Keywords "," }}" />
 {{- end -}}
 
+{{- range .Params.t -}}
+{{ $currentKeyword := . }}
+{{- range $iemlKey, $iemlKeyword := $.Site.Data.ieml }}
+{{- if eq $currentKeyword $iemlKey }}
+<meta name="keyword" lang="ieml" content="{{ $iemlKeyword}}" />
+<meta name="keyword" lang="{{ $.Page.Lang }}" content="{{ $iemlKey}}" />
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
 {{- if .Site.Author -}}
-<meta name="author" content="{{ delimit .Site.Author " " }}" />
+<meta name="author" content="{{ .Site.Author.name }}" />
 {{- end -}}
 
 {{/* Being nice with gohugo.io */}}
 {{ hugo.Generator }}
 
-{{ partial "head/favicon.html" . }}
+{{ partial "favicon.html" . }}
 
 <!-- Open Graph -->
-{{- partial "head/opengraph.html" . -}}
+{{- partial "opengraph.html" . -}}
 
 <!-- Twitter Cards -->
-{{- partial "head/twitter_cards.html" . -}}
+{{- partial "twitter_cards.html" . -}}
 
 <!-- Schema.org -->
-{{- partial "head/schema.html" . -}}
+{{- partial "schema.html" . -}}
 
 <!-- Dublin Core -->
-{{- partial "head/dublin_core.html" . -}}
-
-<!-- FOUC -->
-<script>
-  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
-</script>
+{{- partial "dublin_core.html" . -}}
 
 {{- if .Site.IsServer }}
   {{ $style := resources.Get "styles/styles.dev.css" }}
@@ -43,8 +53,8 @@
   <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
 {{- end }}
 
-{{- with .OutputFormats.Get "rss" -}}
+{{ with .OutputFormats.Get "rss" -}}
 <!-- RSS Feed -->
-{{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-{{- end -}}
+  {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}
 

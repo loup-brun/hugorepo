@@ -10,10 +10,6 @@ help:
 	@echo "  all     Build and deploy."
 
 serve:
-	@echo "Note: to work on styles, run the following in parallel:"
-	@echo 
-	@echo "  npm run serve:styles"
-	@echo 
 	hugo serve --disableFastRender
 
 build:

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "My favourite files for making websites with Hugo.",
   "scripts": {
-    "serve:styles": "npx postcss assets/src/index.css -o assets/styles/styles.dev.css --config assets/src/dev --watch",
-    "build:styles": "npx postcss assets/src/index.css -o assets/styles/styles.built.css --config assets/src",
+    "serve:styles": "\n echo \"WARNING! DEPRECRATED COMMAND (FOR NOW)\n\n\" && npx postcss assets/src/index.css -o assets/styles/styles.dev.css --config assets/src/dev --watch",
+    "build:styles": "\n echo \"WARNING! DEPRECRATED COMMAND (FOR NOW)\n\n\" && npx postcss assets/src/index.css -o assets/styles/styles.built.css --config assets/src",
     "serve": "hugo serve --disableFastRender --buildDrafts --buildFuture",
     "build": "rm -rf public && hugo --minify",
     "deploy": "commands/deploy.sh"
@@ -12,7 +12,7 @@
   "author": "Louis-Olivier Brassard <louis@loupbrun.ca>",
   "license": "WTFPL",
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^2.0.6",
+    "@fullhuman/postcss-purgecss": "^3.1.0",
     "autoprefixer": "^10.1.0",
     "postcss": "^8.2.0",
     "postcss-cli": "^8.3.0",

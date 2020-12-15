@@ -1,6 +1,6 @@
 {
   "name": "hugorepo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "My favourite files for making websites with Hugo.",
   "scripts": {
     "serve:styles": "\n echo \"WARNING! DEPRECRATED COMMAND (FOR NOW)\n\n\" && npx postcss assets/src/index.css -o assets/styles/styles.dev.css --config assets/src/dev --watch",
